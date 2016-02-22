@@ -41,6 +41,10 @@ public class Hello {
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
 	public String redirectRequestToRegistrationPage(WebRequest request) {
 		Connection<?> connection = ProviderSignInUtils.getConnection(request);
+		String providerId = connection.getKey().getProviderId().toUpperCase();
+		String providerUserId = connection.getKey().getProviderUserId();
+		if(!userDao.exist(providerId,providerUserId))
+			userDao.create(providerId,providerUserId);
 		User logged = makeLogin(connection);
 		SecurityUtil.logInUser(logged);
 		return "redirect:/logged";
@@ -56,10 +60,6 @@ public class Hello {
 	private User makeLogin(Connection<?> connection) {
 		User user = new User();
 		if (connection != null) {
-			String providerId = connection.getKey().getProviderId().toUpperCase();
-			String providerUserId = connection.getKey().getProviderUserId();
-			if(!userDao.exist(providerId,providerUserId))
-				userDao.create(providerId,providerUserId);
 			UserProfile socialMediaProfile = connection.fetchUserProfile();
 			user.setEmail(socialMediaProfile.getEmail());
 			user.setFirstName(socialMediaProfile.getFirstName());

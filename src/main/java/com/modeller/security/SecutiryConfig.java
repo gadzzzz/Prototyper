@@ -31,6 +31,7 @@ public class SecutiryConfig extends WebSecurityConfigurerAdapter {
 		.and()
 			.authorizeRequests()
 			.antMatchers(
+				"/resources/**",
 				"/auth/**",
 				"/login",
 				"/signup/**",
