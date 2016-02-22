@@ -1,6 +1,7 @@
 package com.modeller.controllers;
 
 import com.modeller.dao.api.UserDao;
+import com.modeller.models.ExampleUserDetails;
 import com.modeller.security.SecurityUtil;
 import com.modeller.models.User;
 import com.modeller.models.api.Role;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by Gadzzzz on 10.02.2016.
@@ -44,8 +47,9 @@ public class Hello {
 	}
 
 	@RequestMapping(value = "/logged", method = RequestMethod.GET)
-	public String logged(Authentication authentication){
-		System.out.println(authentication.getPrincipal().toString());
+	public String logged(Authentication authentication, HttpServletRequest request){
+		ExampleUserDetails user = (ExampleUserDetails) authentication.getPrincipal();
+		request.setAttribute("userinfo",user.getUsername());
 		return "modeller";
 	}
 

@@ -10,11 +10,31 @@
     color: #009dff;
 }
 
+.centered {
+    position: absolute;
+    left: 50%;
+    margin-left: -100px;
+}
 #logo{
     font-size: xx-large;
     font-family: Tahoma;
     color: white;
     margin-left: 90px;
+    float: left;
+}
+
+#userinfo{
+    font-size: medium;
+    font-family: Tahoma;
+    color: white;
+    margin-right: 90px;
+    margin-top: 18px;
+    float: right;
+}
+#userinfo a{
+    font-size: medium;
+    font-family: Tahoma;
+    color: white;
 }
 
 .elementStyle{

@@ -18,6 +18,7 @@
 <div id="parent">
     <div id="toolbar">
         <div id="logo">Modeler</div>
+        <div id="userinfo">${userinfo} <a href="/logout">logout</a> </div>
     </div>
     <div id="elements">
         <table >
