@@ -1,0 +1,243 @@
+.activeElement {
+    border-color: #009dff;
+    box-shadow: 0 0 5px #009dff;
+    color: #009dff;
+}
+
+.activeForm {
+    border-color: #009dff;
+    box-shadow: 0 0 5px #009dff;
+    color: #009dff;
+}
+
+#logo{
+    font-size: xx-large;
+    font-family: Tahoma;
+    color: white;
+    margin-left: 90px;
+}
+
+.elementStyle{
+    margin: 1px;
+}
+
+.elementButton{
+    overflow: hidden;
+    font-size: small;
+    font-family: Tahoma;
+    border: thin solid lightgray;
+    border-radius:10px;
+    width: 4em;
+    text-align: center;
+    padding:10px;
+    background-color: azure;
+}
+
+.elementLabel{
+    font-size: small;
+    font-family: Tahoma;
+    padding:10px;
+}
+
+.elementTextBlock{
+    font-size: small;
+    font-family: Tahoma;
+    padding:10px;
+    overflow: hidden;
+    width:500px;
+}
+
+.elementLink{
+    color: cornflowerblue;
+    font-size: small;
+    font-family: Tahoma;
+    padding:10px;
+    text-decoration: underline;
+}
+
+.elementField{
+    white-space:nowrap;
+    overflow: hidden;
+    font-size: small;
+    font-family: Tahoma;
+    max-height: 3em;
+    border: thin solid lightgray;
+    width: 12em;
+    text-align: left;
+    padding:5px;
+    background-color: azure;
+}
+
+.elementTextArea{
+    overflow: scroll;
+    font-size: small;
+    font-family: Tahoma;
+    border: thin solid lightgray;
+    width: 12em;
+    min-height: 5em;
+    height: 5em;
+    text-align: left;
+    padding:5px;
+    background-color: azure;
+}
+
+.elementHr{
+    width: 50px;
+    padding: 10px;
+}
+
+.elementImage{
+    width: 5em;
+    height: 3.3em;
+    background-size: cover;
+    background-image: url('images/image.png');
+}
+
+.elementCheckBox{
+    padding: 10px;
+    font-size: small;
+    font-family: Tahoma;
+}
+
+.elementRadioButton{
+    padding: 10px;
+    font-size: small;
+    font-family: Tahoma;
+}
+
+.elementSelect{
+    padding: 15px;
+    font-size: small;
+    font-family: Tahoma;
+}
+
+.elementForm{
+    padding: 15px;
+    width:100px;
+    height: 100px;
+    overflow: hidden;
+    border: thin solid lightgray;
+}
+
+li{
+    padding-bottom: 5px;
+}
+
+#parent{
+    margin: auto;
+    position: relative;
+    width:100%;
+}
+
+#toolbar{
+    background-color: #1b4057;
+    border: solid 1px lightgray;
+    witdth: 100%;
+    height: 40px;
+}
+
+#elements{
+    background-color: #f0f0f0;
+    width: 200px;
+    height: 900px;
+    border: solid 1px lightgray;
+    position: absolute;
+    float: left;
+}
+
+#elements td{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 90px;
+    height: 70px;
+    background: #ffffff;
+}
+
+#elements td:hover {
+    background: #e0e0e0;
+}
+
+#patterns{
+    background-color: #f0f0f0;
+    width: 100%;
+    height: 560px;
+    overflow-y: scroll;
+}
+
+#patterns td{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 140px;
+    height: 120px;
+    background: #ffffff;
+}
+
+#patterns td:hover {
+    background: #e0e0e0;
+}
+
+#content{
+    left: 205px;
+    right:305px;
+    height: 800px;
+    border: solid 1px lightgray;
+    position: absolute;
+    overflow: scroll;
+
+}
+
+#pages{
+    height:100px;
+    border: solid 1px lightgray;
+    position: absolute;
+    left: 205px;
+    right: 305px;
+    top: 842px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    display: inline-flex;
+}
+
+#menu {
+    width: 300px;
+    height: 900px;
+    border: solid 1px lightgray;
+    position: absolute;
+    right: 0px;
+}
+
+.quickbutton{
+    padding: 10px;
+    background-color: #6997b3;
+    margin: 1px;
+}
+
+ul{
+    list-style-type: none;
+    padding-right:10px;
+    text-align: right;
+}
+
+hr{
+    background-color: lightgray;
+    border:0px none;
+    height:1px;
+}
+
+.pagePreview{
+    width: 60px;
+    height: 60px;
+    border: solid 1px lightgray;
+    margin-left: 10px;
+    margin-top: 2px;
+}
+
+.textPreview{
+    position: relative;
+    top:60px;
+    left: 45%;
+    font-family: Tahoma;
+    font-size: small;
+}
