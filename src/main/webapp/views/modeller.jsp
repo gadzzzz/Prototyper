@@ -1,9 +1,13 @@
 <%@ page contentType="text/html;charset=utf-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>Site modeler</title>
+
+    <link rel="stylesheet" href="http://lipis.github.io/bootstrap-social/assets/css/font-awesome.css">
+    <link rel="stylesheet" href="http://lipis.github.io/bootstrap-social/bootstrap-social.css">
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.15/themes/ui-lightness/jquery-ui.css">
@@ -13,12 +17,17 @@
     <script type="text/javascript" src="/resources/libs/html2canvas.js"></script>
     <script type="text/javascript" src="/resources/libs/jquery.plugin.html2canvas.js"></script>
     <script type="text/javascript" src="/resources/htmlpatterns/SimpleElements.js"></script>
+
 </head>
 <body onload="addPreviewPage()">
 <div id="parent">
     <div id="toolbar">
-        <div id="logo">Modeler</div>
-        <div id="userinfo">${userinfo} <a href="/logout">logout</a> </div>
+        <div id="logo"><img src="/resources/images/logo.png" width="38px" height="38px"> Prototyper</div>
+        <div id="userinfo">
+            <c:if test="${provider eq 'FACEBOOK'}"><i class="fa fa-facebook"></i></c:if>
+            <c:if test="${provider eq 'GOOGLE'}"><i class="fa fa-google"></i></c:if>
+            <c:if test="${provider eq 'VKONTAKTE'}"><i class="fa fa-vk"></i></c:if>
+            &nbsp;${userinfo}&nbsp;<a href="/logout">logout</a></div>
     </div>
     <div id="elements">
         <table >

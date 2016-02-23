@@ -53,7 +53,9 @@ public class Hello {
 	@RequestMapping(value = "/logged", method = RequestMethod.GET)
 	public String logged(Authentication authentication, HttpServletRequest request){
 		ExampleUserDetails user = (ExampleUserDetails) authentication.getPrincipal();
-		request.setAttribute("userinfo",user.getUsername());
+		request.getSession().setAttribute("userinfo",user.getUsername());
+		request.getSession().setAttribute("provider",user.getSocialSignInProvider());
+//		request.setAttribute("userinfo",user.getUsername());
 		return "modeller";
 	}
 
