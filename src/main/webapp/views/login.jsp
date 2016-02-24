@@ -59,7 +59,7 @@
 </div>
 </div>
 <div class="footer">
-    Prototyper @2016<br>
+    Prototyper @ 2016<br>
     by Hadzhiev Bogdan<br>
 </div>
 </body>

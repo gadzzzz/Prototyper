@@ -6,7 +6,7 @@ import lombok.Setter;
 /**
  * Created by Gadzzzz on 10.02.2016.
  */
-public class Patterns {
+public class Pattern {
 	@Getter @Setter
 	private  int id;
 	@Getter @Setter

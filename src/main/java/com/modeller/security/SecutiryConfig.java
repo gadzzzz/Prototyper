@@ -39,7 +39,10 @@ public class SecutiryConfig extends WebSecurityConfigurerAdapter {
 			).permitAll()
 			.antMatchers("/**").hasRole("USER")
 		.and()
-			.apply(new SpringSocialConfigurer());
+			.apply(new SpringSocialConfigurer())
+		.and()
+			.csrf()
+			.disable();
 	}
 
 	@Bean

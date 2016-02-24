@@ -22,7 +22,11 @@
 <body onload="addPreviewPage()">
 <div id="parent">
     <div id="toolbar">
-        <div id="logo"><img src="/resources/images/logo.png" width="38px" height="38px"> Prototyper</div>
+        <div id="logo">
+            <img src="/resources/images/logo-white.png" width="35px" height="35px"> Prototyper
+        </div>
+        &nbsp;<span title="Сохранить шаблон" onclick="save()" style='cursor: pointer'><img class="quickbutton" src='/resources/images/icons/save.png'></span>
+        <span title="Загрузить шаблон" onclick="" style='cursor: pointer'><img class="quickbutton" src='/resources/images/icons/load.png'></span>
         <div id="userinfo">
             <c:if test="${provider eq 'FACEBOOK'}"><i class="fa fa-facebook"></i></c:if>
             <c:if test="${provider eq 'GOOGLE'}"><i class="fa fa-google"></i></c:if>

@@ -34,4 +34,6 @@
 
     <bean id="userDaoImpl" class="com.modeller.dao.impl.UserDaoImpl"></bean>
 
+    <bean id="prototypeDaoImpl" class="com.modeller.dao.impl.PrototypeDaoImpl"></bean>
+
 </beans>

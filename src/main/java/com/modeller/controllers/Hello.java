@@ -34,7 +34,7 @@ public class Hello {
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String showLoginPage(Authentication authentication) {
 		if(authentication!=null)
-			return "modeller";
+			return "redirect:/logged";
 		return "login";
 	}
 
@@ -55,7 +55,6 @@ public class Hello {
 		ExampleUserDetails user = (ExampleUserDetails) authentication.getPrincipal();
 		request.getSession().setAttribute("userinfo",user.getUsername());
 		request.getSession().setAttribute("provider",user.getSocialSignInProvider());
-//		request.setAttribute("userinfo",user.getUsername());
 		return "modeller";
 	}
 
