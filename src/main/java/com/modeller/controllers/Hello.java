@@ -46,6 +46,7 @@ public class Hello {
 		if(!userDao.exist(providerId,providerUserId))
 			userDao.create(providerId,providerUserId);
 		User logged = makeLogin(connection);
+		logged.setId(userDao.getId(providerId,providerUserId));
 		SecurityUtil.logInUser(logged);
 		return "redirect:/logged";
 	}

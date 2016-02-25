@@ -13,8 +13,10 @@ public class PrototypeDaoImpl implements PrototypeDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
-	public void save(Prototype prototype) {
-//		jdbcTemplate.update(SAVE,json);
+	public int save(Prototype prototype) {
+		jdbcTemplate.update(SAVE,prototype.getUserId(),prototype.getUpdateDate());
+		int prototypeId = jdbcTemplate.queryForObject(PROTOTYPE_ID,Integer.class);
+		return prototypeId-1;
 	}
 
 	public Prototype load() {

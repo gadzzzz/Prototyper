@@ -3,11 +3,13 @@ package com.modeller.models;
 import com.modeller.models.api.Role;
 import com.modeller.models.api.SocialMediaService;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
  * Created by Gadzzzz on 11.02.2016.
  */
+@NoArgsConstructor
 public class User {
 	@Getter @Setter
 	private Long id;
@@ -25,9 +27,5 @@ public class User {
 	private SocialMediaService signInProvider;
 	@Getter @Setter
 	private String userName;
-
-	public User() {
-
-	}
 
 }

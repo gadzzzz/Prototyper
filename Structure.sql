@@ -16,6 +16,24 @@ BEGIN
 END;
 /
 
+--Table PROTOTYPES
+
+CREATE TABLE Prototypes(
+prototypeId number primary key,
+userId number not null,
+updateDate date not null
+);
+
+CREATE SEQUENCE prototype_id START WITH 1 INCREMENT BY 1;
+
+CREATE OR REPLACE TRIGGER prototypes_objectid_trigger
+BEFORE INSERT ON Prototypes
+FOR EACH ROW
+BEGIN
+  :NEW.prototypeId:=prototype_id.nextval;
+END;
+/
+
 --Table PAGES
 
 CREATE TABLE pages(

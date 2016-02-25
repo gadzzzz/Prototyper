@@ -7,9 +7,11 @@ import com.modeller.models.Prototype;
  */
 public interface PrototypeDao {
 
-	void save(Prototype prototype);
+	int save(Prototype prototype);
 
 	Prototype load();
 
-	String SAVE = "INSERT INTO PAGES(doc) values (?)";
+	String SAVE = "INSERT INTO PROTOTYPES(userid,updatedate) values (?,?)";
+
+	String PROTOTYPE_ID = "SELECT prototype_id.nextval from dual";
 }

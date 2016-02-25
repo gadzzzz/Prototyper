@@ -62,7 +62,6 @@ function addPreviewPage(){
 				$('#content').empty();
 				if(pageContent!=null){
 					for(var i=0;i<pageContent.length;i++) {
-                        alert(pageContent[i]);
 						createTag(pageContent[i].tagtype);
 						currElementId = '#id'+ elementIndex;
 						$(currElementId+' span').text(pageContent[i].text);
@@ -141,13 +140,16 @@ function createCompoundTag(tag){
 function save(){
     var pageContent = new Array();
     pageContent	= copyContext();
-    alert(pageContent.length);
+    map.put(prevPreviewId,pageContent);
+
+    var list = [];
+    list = map.listValues();
     $.ajax({
         type:"post",
         url:"/save",
         contentType : 'application/json; charset=utf-8',
         dataType : 'json',
-        data: JSON.stringify(pageContent),
+        data: JSON.stringify(list),
         success: function(){
 
         }

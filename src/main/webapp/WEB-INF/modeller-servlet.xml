@@ -32,8 +32,10 @@
         <property name="dataSource" ref="dataSource"></property>
     </bean>
 
-    <bean id="userDaoImpl" class="com.modeller.dao.impl.UserDaoImpl"></bean>
+    <bean id="userDaoImpl" class="com.modeller.dao.impl.UserDaoImpl" scope="prototype"></bean>
 
-    <bean id="prototypeDaoImpl" class="com.modeller.dao.impl.PrototypeDaoImpl"></bean>
+    <bean id="prototypeDaoImpl" class="com.modeller.dao.impl.PrototypeDaoImpl" scope="prototype"></bean>
+
+    <bean id="pageDaoImpl" class="com.modeller.dao.impl.PageDaoImpl" scope="prototype"></bean>
 
 </beans>

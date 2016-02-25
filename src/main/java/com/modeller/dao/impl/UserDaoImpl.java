@@ -27,4 +27,8 @@ public class UserDaoImpl implements UserDao {
 			Integer.class) != 0;
 		return exist;
 	}
+
+	public long getId(String providerId, String providerUserId){
+		return jdbcTemplate.queryForObject(GET_ID,new Object[]{providerId,providerUserId},Long.class);
+	}
 }
