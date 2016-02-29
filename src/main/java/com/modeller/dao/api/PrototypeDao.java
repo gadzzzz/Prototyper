@@ -9,9 +9,13 @@ public interface PrototypeDao {
 
 	int save(Prototype prototype);
 
-	Prototype load();
+	Prototype load(int id);
 
-	String SAVE = "INSERT INTO PROTOTYPES(userid,updatedate) values (?,?)";
+	int currentId();
+
+	String SAVE = "INSERT INTO PROTOTYPES(userid,updatedate,name) values (?,?,?)";
 
 	String PROTOTYPE_ID = "SELECT prototype_id.nextval from dual";
+
+	String LOAD = "SELECT * FROM PROTOTYPES WHERE PROTOTYPEID=?";
 }

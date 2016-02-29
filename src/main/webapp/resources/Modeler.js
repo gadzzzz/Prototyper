@@ -5,7 +5,6 @@ var elementIndex=0;
 var previewPageIndex=0;
 var map;
 
-
 function addElement(content,taghtml) {
 	$(content).append(taghtml);
 	$('.resizeElement').resizable({
@@ -141,7 +140,6 @@ function save(){
     var pageContent = new Array();
     pageContent	= copyContext();
     map.put(prevPreviewId,pageContent);
-
     var list = [];
     list = map.listValues();
     $.ajax({
@@ -152,6 +150,19 @@ function save(){
         data: JSON.stringify(list),
         success: function(){
 
+        }
+    });
+}
+
+function load(prototypeId){
+    $.ajax({
+        type:"post",
+        url:"/load",
+        contentType : 'application/json; charset=utf-8',
+        dataType : 'json',
+        data: JSON.stringify(prototypeId),
+        success: function(data){
+            alert(data.name+";"+data.updateDate);
         }
     });
 }

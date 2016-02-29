@@ -7,6 +7,7 @@ import lombok.*;
  */
 @NoArgsConstructor
 @RequiredArgsConstructor
+@AllArgsConstructor
 public class Page {
 	@Getter @Setter
 	private int id;

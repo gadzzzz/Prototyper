@@ -17,7 +17,27 @@
     <script type="text/javascript" src="/resources/libs/html2canvas.js"></script>
     <script type="text/javascript" src="/resources/libs/jquery.plugin.html2canvas.js"></script>
     <script type="text/javascript" src="/resources/htmlpatterns/SimpleElements.js"></script>
-
+    <script>
+        function changeNameToSave(){
+            if($('#savediv').css('display')=='inline')
+                $('#savediv').css('display','none');
+            else
+                $('#savediv').css('display','inline');
+            $('#loaddiv').css('display','none');
+        }
+        function changeNameToLoad(){
+            if($('#loaddiv').css('display')=='inline')
+                $('#loaddiv').css('display','none');
+            else
+                $('#loaddiv').css('display','inline');
+            $('#savediv').css('display','none');
+        }
+    </script>
+    <style>
+        body{
+            background-color: #e9eae4;
+        }
+    </style>
 </head>
 <body onload="addPreviewPage()">
 <div id="parent">
@@ -25,8 +45,21 @@
         <div id="logo">
             <img src="/resources/images/logo-white.png" width="35px" height="35px"> Prototyper
         </div>
-        &nbsp;<span title="Сохранить шаблон" onclick="save()" style='cursor: pointer'><img class="quickbutton" src='/resources/images/icons/save.png'></span>
-        <span title="Загрузить шаблон" onclick="" style='cursor: pointer'><img class="quickbutton" src='/resources/images/icons/load.png'></span>
+        &nbsp;<span title="Сохранить шаблон" onclick="changeNameToSave()" style='cursor: pointer'><img class="quickbutton" src='/resources/images/icons/save.png'></span>
+        <span style="position: relative;top: -16px; display: none" id="savediv">
+            <input class="formControl" type="text" placeholder="name" id="savename">
+            <button onclick="save()">save</button>
+            <button onclick="changeNameToSave()">cancel</button>
+            </span>
+        <span title="Загрузить шаблон" onclick="changeNameToLoad()" style='cursor: pointer'><img class="quickbutton" src='/resources/images/icons/load.png'></span>
+        <span style="position: relative;top: -16px;display: none" id="loaddiv">
+            <select class="formControl">
+            <option>Пункт 1</option>
+            <option>Пункт 2</option>
+            </select>
+            <button onclick="load(9)">load</button>
+            <button onclick="changeNameToLoad()">cancel</button>
+        </span>
         <div id="userinfo">
             <c:if test="${provider eq 'FACEBOOK'}"><i class="fa fa-facebook"></i></c:if>
             <c:if test="${provider eq 'GOOGLE'}"><i class="fa fa-google"></i></c:if>
@@ -58,7 +91,7 @@
             </tr>
             <tr>
                 <td colspan="2"  onclick="createTag('textblock')">
-                    <div class="elementLabel elementStyle">...<br>блок текста<br>...</div>
+                    <div class="elementLabel elementStyle">..блок текста..<br>..блок текста..<br>..блок текста..</div>
                 </td>
             </tr>
             <tr>
@@ -71,7 +104,7 @@
             </tr>
             <tr>
                 <td colspan="2" onclick="createTag('textarea')">
-                    <div class="elementTextArea elementStyle" >...<br>многострочное поле<br>...</div>
+                    <div class="elementTextArea elementStyle" >многострочное поле<br>многострочное поле<br>многострочное поле</div>
                 </td>
             </tr>
             <tr>
@@ -88,40 +121,40 @@
         <div id="content"></div>
     </div>
     <div id="pages">
-        <div><span title="Создать страницу" onclick="addPreviewPage()"><img class="quickbutton" src='/resources/images/icons/create.png'></span></div>
-        <div><span title="Удалить страницу" onclick="removePreviewPage()"><img class="quickbutton" src='/resources/images/icons/delete.png'></span></div>
+        <div><span title="Создать страницу" style='cursor: pointer' onclick="addPreviewPage()"><img class="quickbutton" src='/resources/images/icons/create.png'></span></div>
+        <div><span title="Удалить страницу" style='cursor: pointer' onclick="removePreviewPage()"><img class="quickbutton" src='/resources/images/icons/delete.png'></span></div>
     </div>
     <div id="menu">
         <ul style="">
             <li>Операции:
                 <div>
-                    <span title="Копировать элемент" onclick="copyElement()"><img class="quickbutton" src='/resources/images/icons/copy.png'></span>
-                    <span title="Удалить элемент" onclick="removeElement()"><img class="quickbutton" src='/resources/images/icons/delete.png'></span>
+                    <span title="Копировать элемент" style='cursor: pointer' onclick="copyElement()"><img class="quickbutton" src='/resources/images/icons/copy.png'></span>
+                    <span title="Удалить элемент" style='cursor: pointer' onclick="removeElement()"><img class="quickbutton" src='/resources/images/icons/delete.png'></span>
                 </div>
             </li>
             <li>
-                Свойства:<input id="elementId" type="text" size="5" readonly>
+                Свойства:<input class="formControl" id="elementId" type="text" size="5" readonly>
             </li>
             <li>
-                текст:<input id="elementText" type="text">
+                текст:<input class="formControl" id="elementText" type="text">
             </li>
             <li>
-                шрифт:<input id="elementTextSize" type="text">
+                шрифт:<input class="formControl" id="elementTextSize" type="text">
             </li>
             <li>
-                ширина:<input id="elementWidth" type="text">
+                ширина:<input class="formControl" id="elementWidth" type="text">
             </li>
             <li>
-                высота:<input id="elementHeight" type="text">
+                высота:<input class="formControl" id="elementHeight" type="text">
             </li>
             <li>
-                х:<input id="elementX" type="text">
+                х:<input class="formControl" id="elementX" type="text">
             </li>
             <li>
-                y:<input id="elementY" type="text">
+                y:<input class="formControl" id="elementY" type="text">
             </li>
             <li>
-                цвет:<input id="elementColor" type="text">
+                цвет:<input class="formControl" id="elementColor" type="text">
             </li>
             <li>
                 <button onclick="changeState()">применить</button>
