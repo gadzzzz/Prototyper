@@ -45,11 +45,11 @@
         <div id="logo">
             <img src="/resources/images/logo-white.png" width="35px" height="35px"> Prototyper
         </div>
-        &nbsp;<span title="Сохранить шаблон" onclick="changeNameToSave()" style='cursor: pointer'><img class="quickbutton" src='/resources/images/icons/save.png'></span>
+        &nbsp;<span title="Сохранить шаблон" onclick="changeNameToSave()" style='cursor: pointer;'><img class="quickbutton" src='/resources/images/icons/save.png'></span>
         <span style="position: relative;top: -16px; display: none" id="savediv">
             <input class="formControl" type="text" placeholder="name" id="savename">
-            <button onclick="save()">save</button>
-            <button onclick="changeNameToSave()">cancel</button>
+            <span title="Сохранить" onclick="save()" style='cursor: pointer;position: relative;top: 12px;'><img class="quickbutton" src='/resources/images/icons/apply.png'></span>
+            <span title="Отменить" onclick="changeNameToSave()" style='cursor: pointer;position: relative;top: 12px;'><img class="quickbutton" src='/resources/images/icons/delete.png'></span>
             </span>
         <span title="Загрузить шаблон" onclick="changeNameToLoad()" style='cursor: pointer'><img class="quickbutton" src='/resources/images/icons/load.png'></span>
         <span style="position: relative;top: -16px;display: none" id="loaddiv">
@@ -57,8 +57,8 @@
             <option>Пункт 1</option>
             <option>Пункт 2</option>
             </select>
-            <button onclick="load(9)">load</button>
-            <button onclick="changeNameToLoad()">cancel</button>
+            <span title="Загрузить" onclick="load(9)" style='cursor: pointer;position: relative;top: 12px;'><img class="quickbutton" src='/resources/images/icons/apply.png'></span>
+            <span title="Отменить" onclick="changeNameToLoad()" style='cursor: pointer;position: relative;top: 12px;'><img class="quickbutton" src='/resources/images/icons/delete.png'></span>
         </span>
         <div id="userinfo">
             <c:if test="${provider eq 'FACEBOOK'}"><i class="fa fa-facebook"></i></c:if>
@@ -67,7 +67,7 @@
             &nbsp;${userinfo}&nbsp;<a href="/logout">logout</a></div>
     </div>
     <div id="elements">
-        <table >
+        <table style="border-spacing: 4px;">
             <tr>
                 <td onclick="createTag('button')">
                     <div class="elementButton elementStyle" >кнопка</div>
@@ -157,7 +157,7 @@
                 цвет:<input class="formControl" id="elementColor" type="text">
             </li>
             <li>
-                <button onclick="changeState()">применить</button>
+                <span title="Применить изменения" onclick="changeState()" style='cursor: pointer'><img class="quickbutton" src='/resources/images/icons/apply.png'></span>
             </li>
         </ul>
         <hr>
