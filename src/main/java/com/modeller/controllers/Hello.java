@@ -1,5 +1,6 @@
 package com.modeller.controllers;
 
+import com.modeller.dao.api.PrototypeDao;
 import com.modeller.dao.api.UserDao;
 import com.modeller.models.ExampleUserDetails;
 import com.modeller.security.SecurityUtil;
@@ -30,6 +31,10 @@ public class Hello {
 	@Autowired
 	@Qualifier("userDaoImpl")
 	private UserDao userDao;
+
+	@Autowired
+	@Qualifier("prototypeDaoImpl")
+	private PrototypeDao prototypeDao;
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String showLoginPage(Authentication authentication) {

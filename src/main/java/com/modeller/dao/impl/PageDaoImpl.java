@@ -22,6 +22,14 @@ public class PageDaoImpl implements PageDao {
 		jdbcTemplate.update(SAVE,page.getPrototypeId(),page.getJson());
 	}
 
+	public void delete(int prototypeId) {
+		jdbcTemplate.update(
+			DELETE,
+			prototypeId
+		);
+	}
+
+
 	public List<Page> load(int prototypeId) {
 		return jdbcTemplate.query(LOAD, new Object[]{prototypeId}, new RowMapper<Page>() {
 			public Page mapRow(ResultSet resultSet, int i) throws SQLException {

@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * Created by Gadzzzz on 24.02.2016.
@@ -44,7 +45,41 @@ public class PrototypeDaoImpl implements PrototypeDao {
 		});
 	}
 
-	public int currentId() {
-		return 0;
+	public List<Prototype> loadAll(long userId) {
+		return jdbcTemplate.query(LOADALL, new Object[]{userId}, new RowMapper<Prototype>() {
+			public Prototype mapRow(ResultSet resultSet, int i) throws SQLException {
+				Prototype prototype = new Prototype(
+					resultSet.getInt("PROTOTYPEID"),
+					resultSet.getLong("USERID"),
+					resultSet.getDate("UPDATEDATE"),
+					resultSet.getString("NAME"),
+					null);
+				return prototype;
+			}
+		});
 	}
+
+	public void update(Prototype prototype) {
+		jdbcTemplate.update(
+			UPDATE,
+			prototype.getName(),
+			prototype.getUpdateDate(),
+			prototype.getId());
+	}
+
+	public void delete(int prototypeId) {
+		jdbcTemplate.update(
+			DELETE,
+			prototypeId
+		);
+	}
+
+	public boolean exist(String name) {
+		boolean exist = jdbcTemplate.queryForObject(
+			EXIST,
+			new Object[]{name},
+			Integer.class) != 0;
+		return exist;
+	}
+
 }

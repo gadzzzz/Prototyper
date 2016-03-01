@@ -48,14 +48,9 @@
     </div>
 <div id="inner" style="width: 370px;height: 200px;">
     <h2 class="shadowtext">Sign In With</h2>
-    <%--<a class="btn btn-block btn-social btn-facebook" style="margin: 5px" href="${pageContext.request.contextPath}/auth/facebook"><span class="fa fa-facebook"></span>Facebook</a>--%>
-    <%--<a class="btn btn-block btn-social btn-google" style="margin: 5px" href="${pageContext.request.contextPath}/auth/google?scope=profile"><span class="fa fa-google"></span>Google+</a>--%>
-    <%--<a class="btn btn-block btn-social btn-vk" style="margin: 5px" href="${pageContext.request.contextPath}/auth/vkontakte"><span class="fa fa-vk"></span>Vkontakte</a>--%>
-
     <a title="Facebook" href="${pageContext.request.contextPath}/auth/facebook" class="btn btn-social-icon btn-lg btn-facebook" style="margin: 5px" ><i class="fa fa-facebook"></i> </a>
     <a title="Google+" href="${pageContext.request.contextPath}/auth/google?scope=profile" class="btn btn-social-icon btn-lg btn-google" style="margin: 5px"><i class="fa fa-google"></i> </a>
     <a title="Vkontakte" href="${pageContext.request.contextPath}/auth/vkontakte" class="btn btn-social-icon btn-lg btn-vk" style="margin: 5px"><i class="fa fa-vk"></i> </a>
-
 </div>
 </div>
 <div class="footer">

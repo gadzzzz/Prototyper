@@ -276,3 +276,12 @@ hr{
     transition: border 0.3s;
 }
 
+.listprototype td{
+    padding: 5px;
+    background: #ffffff;
+    border-bottom: solid 2px #9abdf1;
+}
+
+.listprototype td:hover {
+    background: #9abdf1;
+}

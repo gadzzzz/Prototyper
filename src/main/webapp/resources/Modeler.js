@@ -44,7 +44,6 @@ function addElement(content,taghtml) {
 		}
 	}
 	);
-    preview();
 }
 
 function addPreviewPage(){
@@ -79,6 +78,7 @@ function addPreviewPage(){
 				}
 			}
 			prevPreviewId=currPreviewId;
+            clearMonitorState();
 		}
 	);
 	if(previewPageIndex==1) {
@@ -144,24 +144,33 @@ function createCompoundTag(tag){
 }
 
 function save(){
+    var title = $('#savename').val();
     var pageContent = new Array();
     pageContent	= copyContext();
     map.put(prevPreviewId,pageContent);
     var list = [];
     list = map.listValues();
+    var obj = {
+        id:0,
+        name:title,
+        contextObjects:list};
     $.ajax({
         type:"post",
         url:"/save",
         contentType : 'application/json; charset=utf-8',
         dataType : 'json',
-        data: JSON.stringify(list),
-        success: function(){
-
-        }
+        data: JSON.stringify(obj),
     });
 }
 
 function load(prototypeId){
+    $('#content').empty();
+    $("#pages").contents().filter(function(){
+        return !$(this).is('#pagebtns');
+    }).remove();
+    previewPageIndex = 1;
+    clearMonitorState();
+    map = new Map;
     $.ajax({
         type:"post",
         url:"/load",
@@ -169,7 +178,13 @@ function load(prototypeId){
         dataType : 'json',
         data: JSON.stringify(prototypeId),
         success: function(data){
-            alert(data.name+";"+data.updateDate);
+            $("#savename").val(data.name);
+            for(var i=0;i<data.pageList.length;i++){
+                addPreviewPage();
+                var pg = [];
+                pg = JSON.parse(data.pageList[i].json);
+                map.put('#pg'+previewPageIndex,pg);
+            }
         }
     });
 }
@@ -186,6 +201,7 @@ function monitorState(){
 }
 
 function clearMonitorState(){
+    currElementId = '';
     document.getElementById("elementId").value='';
     document.getElementById("elementText").value='';
     document.getElementById("elementWidth").value='';
@@ -249,3 +265,21 @@ String.prototype.format = function() {
 	}
 	return formatted;
 };
+
+function loadAll(){
+    $.ajax({
+        type:"post",
+        url:"/loadall",
+        contentType : 'application/json; charset=utf-8',
+        dataType : 'json',
+        success: function(data){
+            $('#prototypelist').empty();
+            console.log(data);
+            var str = "<table class='listprototype' width='100%' style='border-spacing: 8px;''>";
+            for(var i=0;i<data.length;i++)
+                str = str + "<tr><td onclick='load("+data[i].id+")'>"+data[i].name+';'+data[i].updateDate+"</td></tr>";
+            var str = str + "</table>";
+            $('#prototypelist').append(str);
+        }
+    });
+}

@@ -10,14 +10,27 @@
     <link rel="stylesheet" href="http://lipis.github.io/bootstrap-social/bootstrap-social.css">
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
-    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.15/themes/ui-lightness/jquery-ui.css">
     <link rel="stylesheet" href="/resources/Modeler.css">
     <script type="text/javascript" src="/resources/Modeler.js"></script>
     <script type="text/javascript" src="/resources/libs/map.js"></script>
     <script type="text/javascript" src="/resources/libs/html2canvas.js"></script>
     <script type="text/javascript" src="/resources/libs/jquery.plugin.html2canvas.js"></script>
     <script type="text/javascript" src="/resources/htmlpatterns/SimpleElements.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <script>
+        $(function() {
+            $("#loaddialog").dialog({
+                autoOpen: false,
+                height: 350,
+                width: 400,
+                resizable: false
+            });
+
+            $("#openload").click(function() {
+                loadAll();
+                $("#loaddialog").dialog("open");
+            });
+        });
         function changeNameToSave(){
             if($('#savediv').css('display')=='inline')
                 $('#savediv').css('display','none');
@@ -40,12 +53,16 @@
     </style>
 </head>
 <body onload="addPreviewPage()">
+<div id="loaddialog" style="background-color: #e9eae4" title="Прототипы">
+    <div id="prototypelist"></div>
+</div>
 <div id="parent">
     <div id="toolbar">
         <div id="logo">
             <img src="/resources/images/logo-white.png" width="35px" height="35px"> Prototyper
         </div>
-        &nbsp;<span title="Сохранить шаблон" onclick="changeNameToSave()" style='cursor: pointer;'><img class="quickbutton" src='/resources/images/icons/save.png'></span>
+        &nbsp;<span title="Новый шаблон" onclick="javascript:location.href='/logged'" style='cursor: pointer;'><img class="quickbutton" src='/resources/images/icons/new.png'></span>
+        <span title="Сохранить шаблон" onclick="changeNameToSave()" style='cursor: pointer;'><img class="quickbutton" src='/resources/images/icons/save.png'></span>
         <span style="position: relative;top: -16px; display: none" id="savediv">
             <input class="formControl" type="text" placeholder="name" id="savename">
             <span title="Сохранить" onclick="save()" style='cursor: pointer;position: relative;top: 12px;'><img class="quickbutton" src='/resources/images/icons/apply.png'></span>
@@ -60,6 +77,7 @@
             <span title="Загрузить" onclick="load(9)" style='cursor: pointer;position: relative;top: 12px;'><img class="quickbutton" src='/resources/images/icons/apply.png'></span>
             <span title="Отменить" onclick="changeNameToLoad()" style='cursor: pointer;position: relative;top: 12px;'><img class="quickbutton" src='/resources/images/icons/delete.png'></span>
         </span>
+        <span title="Выбрать шаблон" id="openload" style='cursor: pointer;'><img class="quickbutton" src='/resources/images/icons/choose.png'></span>
         <div id="userinfo">
             <c:if test="${provider eq 'FACEBOOK'}"><i class="fa fa-facebook"></i></c:if>
             <c:if test="${provider eq 'GOOGLE'}"><i class="fa fa-google"></i></c:if>
@@ -121,8 +139,10 @@
         <div id="content"></div>
     </div>
     <div id="pages">
+        <div id="pagebtns" style="margin-left:5px">
         <div><span title="Создать страницу" style='cursor: pointer' onclick="addPreviewPage()"><img class="quickbutton" src='/resources/images/icons/create.png'></span></div>
         <div><span title="Удалить страницу" style='cursor: pointer' onclick="removePreviewPage()"><img class="quickbutton" src='/resources/images/icons/delete.png'></span></div>
+        </div>
     </div>
     <div id="menu">
         <ul>
