@@ -1,14 +1,26 @@
-var currElementId='';
-var currPreviewId='';
-var prevPreviewId='';
-var elementIndex=0;
-var previewPageIndex=0;
+var currElementId = '';
+var currPreviewId = '';
+var prevPreviewId = '';
+var elementIndex = 0;
+var previewPageIndex = 0;
+var previewPageCount = 0;
 var map;
 
 function addElement(content,taghtml) {
 	$(content).append(taghtml);
+    $('.clickElement').click(
+        function(){
+            if(currElementId!='#'+this.id){
+                currElementId ='#'+ this.id;
+                $(currElementId).addClass('activeElement').siblings().removeClass('activeElement');
+                monitorState();
+                preview();
+            }
+        }
+    );
 	$('.resizeElement').resizable({
 		start: function(event, ui){
+            $('#'+ this.id).trigger("click");
 			currElementId ='#'+ this.id;
 		},
 		resize: function(event, ui) {
@@ -18,17 +30,10 @@ function addElement(content,taghtml) {
 			preview();
 		}
 	});
-	$('.clickElement').click(
-		function(){
-			currElementId ='#'+ this.id;
-			$(currElementId).addClass('activeElement').siblings().removeClass('activeElement');
-			monitorState();
-			preview();
-		}
-	);
 	$('.dragElement').draggable({
 		containment:"parent",
 		start: function () {
+            $('#'+ this.id).trigger("click");
 			currElementId ='#'+ this.id;
 		},
 		drag: function() {
@@ -39,10 +44,12 @@ function addElement(content,taghtml) {
 		}
 	}
 	);
+    preview();
 }
 
 function addPreviewPage(){
 	previewPageIndex++;
+    previewPageCount++;
 	var previewHtml = pagePreviewElement.format(previewPageIndex);
 	$("#pages").append(previewHtml);
 	$('.clickPreview').click(
@@ -178,11 +185,21 @@ function monitorState(){
 	document.getElementById("elementColor").value=$(currElementId).css('background-color');
 }
 
+function clearMonitorState(){
+    document.getElementById("elementId").value='';
+    document.getElementById("elementText").value='';
+    document.getElementById("elementWidth").value='';
+    document.getElementById("elementHeight").value='';
+    document.getElementById("elementX").value='';
+    document.getElementById("elementY").value='';
+    document.getElementById("elementTextSize").value='';
+    document.getElementById("elementColor").value='';
+}
+
 function preview(){
 	html2canvas($('#content'), {
 		onrendered: function(canvas) {
 			var base64String = canvas.toDataURL("image/png");
-			console.log(base64String);
 			$(currPreviewId).css({'background-image':'url('+base64String+')','background-size': 'cover'});
 		}
 	});
@@ -200,11 +217,15 @@ function changeState(){
 function removeElement(){
 	$(currElementId).remove();
 	preview();
+    clearMonitorState();
 }
 
 function removePreviewPage(){
-	$(currPreviewId).remove();
-	$(currPreviewId+' span').remove();
+    if(previewPageCount > 1){
+        $(currPreviewId).remove();
+        $(currPreviewId+' span').remove();
+        previewPageCount--;
+    }
 }
 
 function copyElement(){
@@ -216,6 +237,7 @@ function copyElement(){
 	$(tmpid).height(document.getElementById("elementHeight").value);
 	$(tmpid).offset({top:document.getElementById("elementY").value, left:document.getElementById("elementX").value});
 	$(tmpid+' span').css('font-size',document.getElementById("elementTextSize").value);
+    $(tmpid).trigger("click");
 	currElementId=tmpid;
 }
 

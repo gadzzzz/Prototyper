@@ -67,7 +67,7 @@
             &nbsp;${userinfo}&nbsp;<a href="/logout">logout</a></div>
     </div>
     <div id="elements">
-        <table style="border-spacing: 4px;">
+        <table style="border-spacing: 5px;margin: 10px">
             <tr>
                 <td onclick="createTag('button')">
                     <div class="elementButton elementStyle" >кнопка</div>
@@ -125,7 +125,7 @@
         <div><span title="Удалить страницу" style='cursor: pointer' onclick="removePreviewPage()"><img class="quickbutton" src='/resources/images/icons/delete.png'></span></div>
     </div>
     <div id="menu">
-        <ul style="">
+        <ul>
             <li>Операции:
                 <div>
                     <span title="Копировать элемент" style='cursor: pointer' onclick="copyElement()"><img class="quickbutton" src='/resources/images/icons/copy.png'></span>
@@ -133,28 +133,28 @@
                 </div>
             </li>
             <li>
-                Свойства:<input class="formControl" id="elementId" type="text" size="5" readonly>
+                Свойства: <input class="formControl" id="elementId" type="text" size="5" readonly>
             </li>
             <li>
-                текст:<input class="formControl" id="elementText" type="text">
+                Текст: <input class="formControl" id="elementText" type="text">
             </li>
             <li>
-                шрифт:<input class="formControl" id="elementTextSize" type="text">
+                Шрифт: <input class="formControl" id="elementTextSize" type="text">
             </li>
             <li>
-                ширина:<input class="formControl" id="elementWidth" type="text">
+                Ширина: <input class="formControl" id="elementWidth" type="text">
             </li>
             <li>
-                высота:<input class="formControl" id="elementHeight" type="text">
+                Высота: <input class="formControl" id="elementHeight" type="text">
             </li>
             <li>
-                х:<input class="formControl" id="elementX" type="text">
+                Лево: <input class="formControl" id="elementX" type="text">
             </li>
             <li>
-                y:<input class="formControl" id="elementY" type="text">
+                Верх: <input class="formControl" id="elementY" type="text">
             </li>
             <li>
-                цвет:<input class="formControl" id="elementColor" type="text">
+                Цвет: <input class="formControl" id="elementColor" type="text">
             </li>
             <li>
                 <span title="Применить изменения" onclick="changeState()" style='cursor: pointer'><img class="quickbutton" src='/resources/images/icons/apply.png'></span>
