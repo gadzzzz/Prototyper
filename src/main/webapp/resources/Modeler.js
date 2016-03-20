@@ -5,6 +5,7 @@ var elementIndex = 0;
 var previewPageIndex = 0;
 var previewPageCount = 0;
 var map;
+var isCopy = "ok";
 
 function addElement(content,taghtml) {
 	$(content).append(taghtml);
@@ -59,8 +60,10 @@ function addPreviewPage(){
 			if(map.size==0)
 				prevPreviewId=currPreviewId;
 			var pageContent = new Array();
-			pageContent	= copyContext();
-			map.put(prevPreviewId,pageContent);
+            if(isCopy==="ok"){
+                pageContent	= copyContext();
+                map.put(prevPreviewId,pageContent);
+            }
 			$(currPreviewId).addClass('activeElement').siblings().removeClass('activeElement');
 			pageContent = map.get(currPreviewId);
 			if(currPreviewId!=prevPreviewId){
@@ -82,7 +85,7 @@ function addPreviewPage(){
 		}
 	);
 	if(previewPageIndex==1) {
-		$("#pg" + 1).click();
+		$("#pg1").click();
 	}
 }
 
@@ -113,6 +116,16 @@ function createTag(tag){
 		taghtml = fieldElement.format(elementIndex,tag);
 	else if(tag=='image')
 		taghtml = imageElement.format(elementIndex,tag);
+    else if(tag=='calendar')
+        taghtml = calendarElement.format(elementIndex,tag);
+    else if(tag=='pager')
+        taghtml = pagerElement.format(elementIndex,tag);
+    else if(tag=='vscroll')
+        taghtml = vScrollElement.format(elementIndex,tag);
+    else if(tag=='hscroll')
+        taghtml = hScrollElement.format(elementIndex,tag);
+    else if(tag=='border')
+        taghtml = borderElement.format(elementIndex,tag);
 	else if(tag=='label')
 		taghtml = labelElement.format(elementIndex,tag);
 	else if(tag=='link')
@@ -121,6 +134,8 @@ function createTag(tag){
 		taghtml = textBlockElement.format(elementIndex,tag);
 	else if(tag=='horizontalhr')
 		taghtml = horizontalHrElement.format(elementIndex,tag);
+    else if(tag=='verticalvr')
+        taghtml = verticalHrElement.format(elementIndex,tag);
 	else if(tag=='checkbox')
 		taghtml = checkboxElement.format(elementIndex,tag);
 	else if(tag=='radiobutton')
@@ -145,22 +160,33 @@ function createCompoundTag(tag){
 
 function save(){
     var title = $('#savename').val();
-    var pageContent = new Array();
-    pageContent	= copyContext();
-    map.put(prevPreviewId,pageContent);
-    var list = [];
-    list = map.listValues();
-    var obj = {
-        id:0,
-        name:title,
-        contextObjects:list};
-    $.ajax({
-        type:"post",
-        url:"/save",
-        contentType : 'application/json; charset=utf-8',
-        dataType : 'json',
-        data: JSON.stringify(obj),
-    });
+    if(title.trim()!='') {
+        var pageContent = new Array();
+        pageContent = copyContext();
+        map.put(prevPreviewId, pageContent);
+        var list = [];
+        list = map.listValues();
+        var ok = "ok";
+        for(var i=0;i<list.length;i++)
+            if(list[i].length==0)
+                ok = "no";
+        if(ok == "ok") {
+            var obj = {
+                id: 0,
+                name: title,
+                contextObjects: list
+            };
+            $.ajax({
+                type: "post",
+                url: "/save",
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                data: JSON.stringify(obj),
+            });
+        }else
+            alert("Нельзя сохранять пустые страницы");
+    }else
+        alert("Необходимо задать имя шаблону");
 }
 
 function load(prototypeId){
@@ -168,9 +194,14 @@ function load(prototypeId){
     $("#pages").contents().filter(function(){
         return !$(this).is('#pagebtns');
     }).remove();
-    previewPageIndex = 1;
     clearMonitorState();
     map = new Map;
+    previewPageIndex = 0;
+    previewPageCount = 0;
+    currElementId = '';
+    currPreviewId = '';
+    prevPreviewId = '';
+    elementIndex = 0;
     $.ajax({
         type:"post",
         url:"/load",
@@ -179,14 +210,19 @@ function load(prototypeId){
         data: JSON.stringify(prototypeId),
         success: function(data){
             $("#savename").val(data.name);
+            isCopy = "no";
             for(var i=0;i<data.pageList.length;i++){
                 addPreviewPage();
                 var pg = [];
                 pg = JSON.parse(data.pageList[i].json);
                 map.put('#pg'+previewPageIndex,pg);
             }
+            prevPreviewId = '';
+            $("#pg1").click();
+            isCopy = "ok";
         }
     });
+    $("#loaddialog").dialog("close");
 }
 
 function monitorState(){
@@ -280,6 +316,16 @@ function loadAll(){
                 str = str + "<tr><td onclick='load("+data[i].id+")'>"+data[i].name+';'+data[i].updateDate+"</td></tr>";
             var str = str + "</table>";
             $('#prototypelist').append(str);
+        }
+    });
+}
+
+function toFile(){
+    html2canvas($('#content'), {
+        onrendered: function(canvas) {
+            var base64String = canvas.toDataURL("image/png");
+            base64String.replace(/^data:image\/[^;]/, 'data:application/octet-stream');
+            window.open(base64String);
         }
     });
 }

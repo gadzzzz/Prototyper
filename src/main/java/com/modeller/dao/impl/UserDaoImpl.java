@@ -31,4 +31,11 @@ public class UserDaoImpl implements UserDao {
 	public long getId(String providerId, String providerUserId){
 		return jdbcTemplate.queryForObject(GET_ID,new Object[]{providerId,providerUserId},Long.class);
 	}
+
+	public int getStatistic() {
+		return jdbcTemplate.queryForObject(
+			STATISTIC,
+			Integer.class
+		);
+	}
 }

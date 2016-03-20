@@ -29,7 +29,6 @@ public class PageDaoImpl implements PageDao {
 		);
 	}
 
-
 	public List<Page> load(int prototypeId) {
 		return jdbcTemplate.query(LOAD, new Object[]{prototypeId}, new RowMapper<Page>() {
 			public Page mapRow(ResultSet resultSet, int i) throws SQLException {
@@ -40,5 +39,12 @@ public class PageDaoImpl implements PageDao {
 				return page;
 			}
 		});
+	}
+
+	public int getStatistic() {
+		return jdbcTemplate.queryForObject(
+			STATISTIC,
+			Integer.class
+		);
 	}
 }

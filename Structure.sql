@@ -21,7 +21,8 @@ END;
 CREATE TABLE Prototypes(
 prototypeId number primary key,
 userId number not null,
-updateDate date not null
+updateDate date not null,
+name varchar2(40) not null
 );
 
 CREATE SEQUENCE prototype_id START WITH 1 INCREMENT BY 1;

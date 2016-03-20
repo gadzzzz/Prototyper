@@ -1,5 +1,6 @@
 package com.modeller.controllers;
 
+import com.modeller.dao.api.PageDao;
 import com.modeller.dao.api.PrototypeDao;
 import com.modeller.dao.api.UserDao;
 import com.modeller.models.ExampleUserDetails;
@@ -36,10 +37,17 @@ public class Hello {
 	@Qualifier("prototypeDaoImpl")
 	private PrototypeDao prototypeDao;
 
+	@Autowired
+	@Qualifier("pageDaoImpl")
+	private PageDao pageDao;
+
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String showLoginPage(Authentication authentication) {
+	public String showLoginPage(Authentication authentication,HttpServletRequest request) {
 		if(authentication!=null)
 			return "redirect:/logged";
+		request.setAttribute("usercount",userDao.getStatistic());
+		request.setAttribute("prototypecount",prototypeDao.getStatistic());
+		request.setAttribute("pagecount",pageDao.getStatistic());
 		return "login";
 	}
 

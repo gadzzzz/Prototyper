@@ -36,14 +36,6 @@
                 $('#savediv').css('display','none');
             else
                 $('#savediv').css('display','inline');
-            $('#loaddiv').css('display','none');
-        }
-        function changeNameToLoad(){
-            if($('#loaddiv').css('display')=='inline')
-                $('#loaddiv').css('display','none');
-            else
-                $('#loaddiv').css('display','inline');
-            $('#savediv').css('display','none');
         }
     </script>
     <style>
@@ -52,7 +44,7 @@
         }
     </style>
 </head>
-<body onload="addPreviewPage()">
+<body onload='addPreviewPage()'>
 <div id="loaddialog" style="background-color: #e9eae4" title="Прототипы">
     <div id="prototypelist"></div>
 </div>
@@ -67,17 +59,9 @@
             <input class="formControl" type="text" placeholder="name" id="savename">
             <span title="Сохранить" onclick="save()" style='cursor: pointer;position: relative;top: 12px;'><img class="quickbutton" src='/resources/images/icons/apply.png'></span>
             <span title="Отменить" onclick="changeNameToSave()" style='cursor: pointer;position: relative;top: 12px;'><img class="quickbutton" src='/resources/images/icons/delete.png'></span>
-            </span>
-        <span title="Загрузить шаблон" onclick="changeNameToLoad()" style='cursor: pointer'><img class="quickbutton" src='/resources/images/icons/load.png'></span>
-        <span style="position: relative;top: -16px;display: none" id="loaddiv">
-            <select class="formControl">
-            <option>Пункт 1</option>
-            <option>Пункт 2</option>
-            </select>
-            <span title="Загрузить" onclick="load(9)" style='cursor: pointer;position: relative;top: 12px;'><img class="quickbutton" src='/resources/images/icons/apply.png'></span>
-            <span title="Отменить" onclick="changeNameToLoad()" style='cursor: pointer;position: relative;top: 12px;'><img class="quickbutton" src='/resources/images/icons/delete.png'></span>
         </span>
         <span title="Выбрать шаблон" id="openload" style='cursor: pointer;'><img class="quickbutton" src='/resources/images/icons/choose.png'></span>
+        <span title="Экспорт в файл" id="export" onclick="toFile()" style='cursor: pointer;'><img class="quickbutton" src='/resources/images/icons/load.png'></span>
         <div id="userinfo">
             <c:if test="${provider eq 'FACEBOOK'}"><i class="fa fa-facebook"></i></c:if>
             <c:if test="${provider eq 'GOOGLE'}"><i class="fa fa-google"></i></c:if>
@@ -133,6 +117,32 @@
                     <div class="elementSelect elementStyle" ><select disabled><option>список</option></select></div>
                 </td>
             </tr>
+            <tr>
+                <td colspan="2"  onclick="createTag('calendar')">
+                    <div class="elementCalendar elementStyle"></div>
+                </td>
+            </tr>
+            <tr>
+                <td  onclick="createTag('verticalvr')">
+                    <div class="elementVr elementStyle"><div style='border-left: solid 1px;min-height: 100%; width: 1px;margin-left: 30px'></div></div>
+                </td>
+                <td  onclick="createTag('vscroll')">
+                    <div class="elementVScroll elementStyle"><div style='overflow-y: scroll;min-height: 100%;margin-right: 20px'></div></div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"  onclick="createTag('pager')">
+                    <div class="elementPager elementStyle"></div>
+                </td>
+            </tr>
+            <tr>
+                <td  onclick="createTag('hscroll')">
+                    <div class="elementHScroll elementStyle"><div style='overflow-x: scroll;min-width: 100%;margin-left: 15px'></div></div>
+                </td>
+                <td  onclick="createTag('border')">
+                    <div class="elementBorder elementStyle"><div style='border: solid 1px;width:74px;height: 48px;'></div></div>
+                </td>
+            </tr>
         </table>
     </div>
     <div class="saveConent">
@@ -140,7 +150,7 @@
     </div>
     <div id="pages">
         <div id="pagebtns" style="margin-left:5px">
-        <div><span title="Создать страницу" style='cursor: pointer' onclick="addPreviewPage()"><img class="quickbutton" src='/resources/images/icons/create.png'></span></div>
+        <div><span title="Создать страницу" style='cursor: pointer' onclick='addPreviewPage()'><img class="quickbutton" src='/resources/images/icons/create.png'></span></div>
         <div><span title="Удалить страницу" style='cursor: pointer' onclick="removePreviewPage()"><img class="quickbutton" src='/resources/images/icons/delete.png'></span></div>
         </div>
     </div>

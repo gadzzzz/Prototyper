@@ -82,4 +82,18 @@ public class PrototypeDaoImpl implements PrototypeDao {
 		return exist;
 	}
 
+	public int lodaByName(String name) {
+		return jdbcTemplate.queryForObject(
+			LOAD_BY_NAME,
+			new Object[]{name},
+			Integer.class);
+	}
+
+	public int getStatistic() {
+		return jdbcTemplate.queryForObject(
+			STATISTIC,
+			Integer.class
+		);
+	}
+
 }

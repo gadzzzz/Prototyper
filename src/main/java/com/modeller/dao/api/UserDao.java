@@ -11,11 +11,15 @@ public interface UserDao {
 
 	boolean exist(String providerId,String providerUserId);
 
-	public long getId(String providerId, String providerUserId);
+	long getId(String providerId, String providerUserId);
+
+	int getStatistic();
 
 	String EXIST = "SELECT COUNT(*) FROM USERCONNECTION WHERE PROVIDERID = ? AND PROVIDERUSERID = ?";
 
 	String CREATE = "INSERT INTO USERCONNECTION(PROVIDERID,PROVIDERUSERID) values (?,?)";
 
 	String GET_ID = "SELECT userid FROM USERCONNECTION WHERE PROVIDERID = ? AND PROVIDERUSERID = ?";
+
+	String STATISTIC = "SELECT count(*) FROM USERCONNECTION";
 }

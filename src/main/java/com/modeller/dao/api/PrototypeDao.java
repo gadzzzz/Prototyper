@@ -21,6 +21,10 @@ public interface PrototypeDao {
 
 	boolean exist(String name);
 
+	int lodaByName(String name);
+
+	int getStatistic();
+
 	String SAVE = "INSERT INTO PROTOTYPES(userid,updatedate,name) values (?,?,?)";
 
 	String PROTOTYPE_ID = "SELECT prototype_id.nextval from dual";
@@ -29,9 +33,13 @@ public interface PrototypeDao {
 
 	String LOADALL = "SELECT * FROM PROTOTYPES WHERE USERID = ?";
 
-	String UPDATE = "UPDATE PROTOTYPES SET name = ?, updatedate = ? WHERE PROTORYPEID = ?";
+	String UPDATE = "UPDATE PROTOTYPES SET name = ?, updatedate = ? WHERE PROTOTYPEID = ?";
 
 	String DELETE = "DELETE FROM PROTOTYPES WHERE PROTOTYPEID = ?";
 
 	String EXIST = "SELECT COUNT(*) FROM PROTOTYPES WHERE name = ?";
+
+	String LOAD_BY_NAME = "SELECT PROTOTYPEID FROM PROTOTYPES WHERE name = ?";
+
+	String STATISTIC = "SELECT count(*) FROM PROTOTYPES";
 }

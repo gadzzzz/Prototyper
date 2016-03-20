@@ -15,9 +15,13 @@ public interface PageDao {
 
 	List<Page> load(int prototypeId);
 
+	int getStatistic();
+
 	String SAVE = "INSERT INTO PAGES(prototypeid,doc) values (?,?)";
 
 	String LOAD = "SELECT * FROM PAGES WHERE PROTOTYPEID = ?";
 
-	String DELETE = "DELETE FROM PAGES WHERE PTOTOTYPEID = ?";
+	String DELETE = "DELETE FROM PAGES WHERE PROTOTYPEID = ?";
+
+	String STATISTIC = "SELECT count(*) FROM PAGES";
 }

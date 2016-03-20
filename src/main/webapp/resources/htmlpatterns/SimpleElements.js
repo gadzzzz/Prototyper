@@ -21,3 +21,15 @@ var selectElement = "<div id=\"id{0}\" tagtype={1} style=\"position:absolute;\" 
 var textAreaElement = "<div id=\"id{0}\" tagtype={1} style=\"position:absolute;\" class=\"clickElement dragElement resizeElement elementTextArea\"><span>Введите многострочный текст...</span></div>";
 
 var pagePreviewElement = "<div id=\"pg{0}\" class=\"pagePreview clickPreview\"><span class=\"textPreview\">{0}</span></div>";
+
+var verticalHrElement = "<div id=\"id{0}\" tagtype={1} style=\"position:absolute;\" class=\"clickElement dragElement resizeElement elementVr\"><div style='border-left: solid 1px;min-height: 100%'></div></div>";
+
+var calendarElement = "<div id=\"id{0}\" tagtype={1} style=\"position:absolute;\" class=\"clickElement dragElement resizeElement elementCalendar\"></div>";
+
+var pagerElement = "<div id=\"id{0}\" tagtype={1} style=\"position:absolute;\" class=\"clickElement dragElement resizeElement elementPager\"></div>";
+
+var vScrollElement = "<div id=\"id{0}\" tagtype={1} style=\"position:absolute;\" class=\"clickElement dragElement resizeElement elementVScroll\"><div style='overflow-y: scroll;min-height: 100%;'></div></div>";
+
+var hScrollElement = "<div id=\"id{0}\" tagtype={1} style=\"position:absolute;\" class=\"clickElement dragElement resizeElement elementHScroll\"><div style='overflow-x: scroll;min-width: 100%'></div></div>";
+
+var borderElement = "<div id=\"id{0}\" tagtype={1} style=\"position:absolute;\" class=\"clickElement dragElement resizeElement elementBorder\"><div style='border: solid 1px;min-height: 100%;min-width: 100%'></div></div>";

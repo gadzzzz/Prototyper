@@ -37,7 +37,7 @@ public class Operations {
 		Gson gson = new Gson();
 		java.sql.Date timeNow = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
 		Prototype prototype = new Prototype(user.getId(),timeNow,jsonObject.getName());
-		if(jsonObject.getId()==0){
+		if(!prototypeDao.exist(jsonObject.getName())){
 			int prototypeId = prototypeDao.save(prototype);
 			for(int i=0;i<jsonObject.getContextObjects().length;i++){
 				String json = gson.toJson(jsonObject.getContextObjects()[i]);
@@ -45,11 +45,13 @@ public class Operations {
 				pageDao.save(page);
 			}
 		}else {
+			int prototypeId = prototypeDao.lodaByName(prototype.getName());
+			prototype.setId(prototypeId);
 			prototypeDao.update(prototype);
-			pageDao.delete(jsonObject.getId());
+			pageDao.delete(prototypeId);
 			for (int i = 0; i < jsonObject.getContextObjects().length; i++) {
 				String json = gson.toJson(jsonObject.getContextObjects()[i]);
-				Page page = new Page(jsonObject.getId(), json);
+				Page page = new Page(prototypeId, json);
 				pageDao.save(page);
 			}
 		}

@@ -118,6 +118,42 @@
     margin: auto;
 }
 
+.elementCalendar{
+    width: 5em;
+    height: 3.3em;
+    background-size: cover;
+    background-image: url('images/calendar.png');
+    margin: auto;
+}
+
+.elementPager{
+    width: 8em;
+    height: 1.3em;
+    background-size: cover;
+    background-image: url('images/pager.png');
+    margin: auto;
+}
+
+.elementVScroll{
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 40px;
+}
+
+.elementHScroll{
+    padding: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 40px;
+}
+
+.elementBorder{
+    width: 50px;
+    height: 50px;
+    padding: 10px;
+}
+
 .elementCheckBox{
     padding: 10px;
     font-size: small;
@@ -134,6 +170,12 @@
     padding: 15px;
     font-size: small;
     font-family: Tahoma;
+}
+
+.elementVr{
+    height: 40px;
+    padding: 10px;
+    color:#d3d3d3;
 }
 
 .elementForm{
