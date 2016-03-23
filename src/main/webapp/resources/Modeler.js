@@ -6,17 +6,25 @@ var previewPageIndex = 0;
 var previewPageCount = 0;
 var map;
 var isCopy = "ok";
+var dragList = [];
 
 function addElement(content,taghtml) {
 	$(content).append(taghtml);
     $('.clickElement').click(
-        function(){
-            if(currElementId!='#'+this.id){
-                currElementId ='#'+ this.id;
-                $(currElementId).addClass('activeElement').siblings().removeClass('activeElement');
-                monitorState();
-                preview();
+        function(e){
+            if (e.ctrlKey) {
+                currElementId = '#' + this.id;
+                $(currElementId).addClass('activeElement');
+                $(currElementId).addClass('multipleSelect');
+            }else {
+                if(currElementId!='#'+this.id) {
+                    currElementId = '#' + this.id;
+                    $('.activeElement').removeClass('multipleSelect');//need fix
+                    $(currElementId).addClass('activeElement').siblings().removeClass('activeElement');
+                    monitorState();
+                }
             }
+            preview();
         }
     );
 	$('.resizeElement').resizable({
@@ -33,18 +41,43 @@ function addElement(content,taghtml) {
 	});
 	$('.dragElement').draggable({
 		containment:"parent",
-		start: function () {
-            $('#'+ this.id).trigger("click");
-			currElementId ='#'+ this.id;
+		start: function (event, ui) {
+            $('#' + this.id).trigger("click");
+            currElementId = '#' + this.id;
+            var classList = $('.multipleSelect');
+            dragList = [];
+            console.log('start');
+            $.each(classList, function(index) {
+                dragList.push(new elementConstrucrot( ui.offset.left-$(this).offset().left,ui.offset.top-$(this).offset().top));
+            });
 		},
-		drag: function() {
-			monitorState();
+		drag: function(event, ui) {
+            if (event.ctrlKey) {
+                var classList = $('.multipleSelect');
+                $.each(classList, function(index) {
+                    if(('#'+$(this).attr('id'))!=currElementId){
+                        var distanceLeft = ui.offset.left-$(this).offset().left;
+                        var distanceTop = ui.offset.top-$(this).offset().top;
+                        var diffLeft = distanceLeft - dragList[index].left;
+                        var diffTop = distanceTop -  dragList[index].top;
+                        $(this).offset({top:$(this).offset().top+diffTop, left:$(this).offset().left+diffLeft});
+                        dragList[index] = (new elementConstrucrot( ui.offset.left-$(this).offset().left,ui.offset.top-$(this).offset().top));
+                    }
+                });
+            }else {
+                monitorState();
+            }
 		},
 		stop: function(){
 			preview();
 		}
 	}
 	);
+}
+
+function elementConstrucrot(left,top){
+    this.left = left;
+    this.top = top;
 }
 
 function addPreviewPage(){
@@ -223,6 +256,38 @@ function load(prototypeId){
         }
     });
     $("#loaddialog").dialog("close");
+}
+
+function autoload(link){
+    $.ajax({
+        type:"post",
+        url:"/loadByLink?link="+link,
+        success: function(data){
+            $("#savename").val(data.name);
+            $('#content').empty();
+            $("#pages").contents().filter(function(){
+                return !$(this).is('#pagebtns');
+            }).remove();
+            clearMonitorState();
+            map = new Map;
+            previewPageIndex = 0;
+            previewPageCount = 0;
+            currElementId = '';
+            currPreviewId = '';
+            prevPreviewId = '';
+            elementIndex = 0;
+            isCopy = "no";
+            for(var i=0;i<data.pageList.length;i++){
+                addPreviewPage();
+                var pg = [];
+                pg = JSON.parse(data.pageList[i].json);
+                map.put('#pg'+previewPageIndex,pg);
+            }
+            prevPreviewId = '';
+            $("#pg1").click();
+            isCopy = "ok";
+        }
+    });
 }
 
 function monitorState(){

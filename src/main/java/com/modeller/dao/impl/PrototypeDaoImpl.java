@@ -19,12 +19,12 @@ public class PrototypeDaoImpl implements PrototypeDao {
 	private JdbcTemplate jdbcTemplate;
 
 	public int save(Prototype prototype) {
-
 		jdbcTemplate.update(
 			SAVE,
 			prototype.getUserId(),
 			prototype.getUpdateDate(),
-			prototype.getName());
+			prototype.getName(),
+			prototype.getLink());
 		int prototypeId = jdbcTemplate.queryForObject(
 			PROTOTYPE_ID,
 			Integer.class);
@@ -39,6 +39,7 @@ public class PrototypeDaoImpl implements PrototypeDao {
 					resultSet.getLong("USERID"),
 					resultSet.getDate("UPDATEDATE"),
 					resultSet.getString("NAME"),
+					resultSet.getString("PROTOTYPELINK"),
 					null);
 				return prototype;
 			}
@@ -53,6 +54,7 @@ public class PrototypeDaoImpl implements PrototypeDao {
 					resultSet.getLong("USERID"),
 					resultSet.getDate("UPDATEDATE"),
 					resultSet.getString("NAME"),
+					resultSet.getString("PROTOTYPELINK"),
 					null);
 				return prototype;
 			}
@@ -74,10 +76,10 @@ public class PrototypeDaoImpl implements PrototypeDao {
 		);
 	}
 
-	public boolean exist(String name) {
+	public boolean exist(String name, long userId) {
 		boolean exist = jdbcTemplate.queryForObject(
 			EXIST,
-			new Object[]{name},
+			new Object[]{name,userId},
 			Integer.class) != 0;
 		return exist;
 	}
@@ -87,6 +89,28 @@ public class PrototypeDaoImpl implements PrototypeDao {
 			LOAD_BY_NAME,
 			new Object[]{name},
 			Integer.class);
+	}
+
+	public Prototype loadByLink(String link) {
+		return jdbcTemplate.queryForObject(LOAD_BY_LINK, new Object[]{link}, new RowMapper<Prototype>() {
+			public Prototype mapRow(ResultSet resultSet, int i) throws SQLException {
+				Prototype prototype = new Prototype(
+					resultSet.getInt("PROTOTYPEID"),
+					resultSet.getLong("USERID"),
+					resultSet.getDate("UPDATEDATE"),
+					resultSet.getString("NAME"),
+					resultSet.getString("PROTOTYPELINK"),
+					null);
+				return prototype;
+			}
+		});
+	}
+
+	public void updateName(Prototype prototype) {
+		jdbcTemplate.update(
+			UPDATE_NAME,
+			prototype.getName(),
+			prototype.getId());
 	}
 
 	public int getStatistic() {

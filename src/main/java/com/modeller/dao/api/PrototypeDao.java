@@ -19,13 +19,17 @@ public interface PrototypeDao {
 
 	void delete(int prototypeId);
 
-	boolean exist(String name);
+	boolean exist(String name, long userId);
 
 	int lodaByName(String name);
 
+	Prototype loadByLink(String link);
+
+	void updateName(Prototype prototype);
+
 	int getStatistic();
 
-	String SAVE = "INSERT INTO PROTOTYPES(userid,updatedate,name) values (?,?,?)";
+	String SAVE = "INSERT INTO PROTOTYPES(userid,updatedate,name,prototypelink) values (?,?,?,?)";
 
 	String PROTOTYPE_ID = "SELECT prototype_id.nextval from dual";
 
@@ -35,11 +39,15 @@ public interface PrototypeDao {
 
 	String UPDATE = "UPDATE PROTOTYPES SET name = ?, updatedate = ? WHERE PROTOTYPEID = ?";
 
+	String UPDATE_NAME = "UPDATE PROTOTYPES SET name = ? WHERE PROTOTYPEID = ?";
+
 	String DELETE = "DELETE FROM PROTOTYPES WHERE PROTOTYPEID = ?";
 
-	String EXIST = "SELECT COUNT(*) FROM PROTOTYPES WHERE name = ?";
+	String EXIST = "SELECT COUNT(*) FROM PROTOTYPES WHERE name = ? and userid = ?";
 
 	String LOAD_BY_NAME = "SELECT PROTOTYPEID FROM PROTOTYPES WHERE name = ?";
 
 	String STATISTIC = "SELECT count(*) FROM PROTOTYPES";
+
+	String LOAD_BY_LINK = "SELECT * FROM PROTOTYPES WHERE prototypelink = ?";
 }

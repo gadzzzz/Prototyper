@@ -22,7 +22,8 @@ CREATE TABLE Prototypes(
 prototypeId number primary key,
 userId number not null,
 updateDate date not null,
-name varchar2(40) not null
+name varchar2(40) not null,
+prototypeLink varchar2(50) not null
 );
 
 CREATE SEQUENCE prototype_id START WITH 1 INCREMENT BY 1;
@@ -50,5 +51,23 @@ BEFORE INSERT ON PAGES
 FOR EACH ROW
 BEGIN
   :NEW.pageId:=page_id.nextval;
+END;
+/
+
+--Table SHARES
+
+CREATE SEQUENCE share_id START WITH 1 INCREMENT BY 1;
+
+CREATE TABLE shares(
+shareId number primary key,
+userId number not null,
+prototypeLink varchar2(50) not null
+);
+
+CREATE OR REPLACE TRIGGER shares_objectid_trigger
+BEFORE INSERT ON SHARES
+FOR EACH ROW
+BEGIN
+  :NEW.shareId:=share_id.nextval;
 END;
 /

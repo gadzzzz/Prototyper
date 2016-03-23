@@ -19,7 +19,10 @@ public class PageDaoImpl implements PageDao {
 	private JdbcTemplate jdbcTemplate;
 
 	public void save(Page page) {
-		jdbcTemplate.update(SAVE,page.getPrototypeId(),page.getJson());
+		jdbcTemplate.update(
+			SAVE,
+			page.getPrototypeId(),
+			page.getJson());
 	}
 
 	public void delete(int prototypeId) {

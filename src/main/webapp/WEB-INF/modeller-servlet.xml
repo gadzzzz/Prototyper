@@ -38,4 +38,6 @@
 
     <bean id="pageDaoImpl" class="com.modeller.dao.impl.PageDaoImpl" scope="prototype"></bean>
 
+    <bean id="shareDaoImpl" class="com.modeller.dao.impl.ShareDaoImpl" scope="prototype"></bean>
+
 </beans>

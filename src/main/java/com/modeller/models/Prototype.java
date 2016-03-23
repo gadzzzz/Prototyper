@@ -19,6 +19,8 @@ public class Prototype {
 	private java.sql.Date updateDate;
 	@Getter @Setter @NonNull
 	private String name;
+	@Getter @Setter @NonNull
+	private String link;
 	@Getter @Setter
 	private List<Page> pageList;
 }

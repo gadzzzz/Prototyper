@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=utf-8" %>
+<%@ page contentType="text/html;charset=utf-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -30,6 +30,12 @@
                 loadAll();
                 $("#loaddialog").dialog("open");
             });
+        });
+        $(function(){
+            var link = '${protolink}';
+            if(link!=""){
+                autoload(link);
+            }
         });
         function changeNameToSave(){
             if($('#savediv').css('display')=='inline')
@@ -63,6 +69,7 @@
         <span title="Выбрать шаблон" id="openload" style='cursor: pointer;'><img class="quickbutton" src='/resources/images/icons/choose.png'></span>
         <span title="Экспорт в файл" id="export" onclick="toFile()" style='cursor: pointer;'><img class="quickbutton" src='/resources/images/icons/load.png'></span>
         <div id="userinfo">
+            <a href="/cabinet">Кабинет</a>
             <c:if test="${provider eq 'FACEBOOK'}"><i class="fa fa-facebook"></i></c:if>
             <c:if test="${provider eq 'GOOGLE'}"><i class="fa fa-google"></i></c:if>
             <c:if test="${provider eq 'VKONTAKTE'}"><i class="fa fa-vk"></i></c:if>
@@ -72,7 +79,7 @@
         <table style="border-spacing: 5px;margin: 10px">
             <tr>
                 <td onclick="createTag('button')">
-                    <div class="elementButton elementStyle" >кнопка</div>
+                    <div class="elementButton elementStyle" >кнопка${protolink}</div>
                 </td>
                 <td onclick="createTag('label')">
                     <div class="elementLabel elementStyle" >текст</div>
