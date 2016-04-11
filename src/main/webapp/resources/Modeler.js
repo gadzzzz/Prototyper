@@ -180,15 +180,21 @@ function createTag(tag){
 	addElement("#content",taghtml);
 }
 
-function createCompoundTag(tag){
-	//elementIndex++;
-	//if(tag=='loginForm') {
-	//	var parentIndex = "#id"+elementIndex;
-	//
-	//	addElement(parentIndex,labelElement.format(++elementIndex,'label'));
-	//	addElement(parentIndex,fieldElement.format(++elementIndex,'field'));
-	//}
-
+function createComplicatedTag(tag){
+    var dataarr = [];
+    if(tag=='loginForm')
+        dataarr = loginForm;
+    if(tag=='registerForm')
+        dataarr = registerForm;
+    if(tag=='newsForm')
+        dataarr = newsForm;
+    jQuery.each(dataarr,function(i, val){
+        createTag(val.name);
+        $("#id"+elementIndex).offset({top:val.top,left:val.left});
+        $("#id"+elementIndex).text(val.val);
+        $("#id"+elementIndex).addClass('activeElement');
+        $("#id"+elementIndex).addClass('multipleSelect');
+    });
 }
 
 function save(){
