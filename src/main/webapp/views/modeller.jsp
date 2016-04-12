@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="/resources/Modeler.css">
     <script type="text/javascript" src="/resources/Modeler.js"></script>
     <script type="text/javascript" src="/resources/libs/map.js"></script>
+    <script type="text/javascript" src="/resources/libs/jqColorPicker.min.js"></script>
     <script type="text/javascript" src="/resources/libs/html2canvas.js"></script>
     <script type="text/javascript" src="/resources/libs/jquery.plugin.html2canvas.js"></script>
     <script type="text/javascript" src="/resources/htmlpatterns/SimpleElements.js"></script>
@@ -20,6 +21,7 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <script>
         $(function() {
+            $('#elementColor').colorPicker();
             $("#loaddialog").dialog({
                 autoOpen: false,
                 height: 350,

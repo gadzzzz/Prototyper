@@ -353,7 +353,7 @@ function monitorState(){
 	document.getElementById("elementX").value=$(currElementId).offset().left;
 	document.getElementById("elementY").value=$(currElementId).offset().top;
 	document.getElementById("elementTextSize").value=$(currElementId+' span').css('font-size');
-	document.getElementById("elementColor").value=$(currElementId).css('background-color');
+	document.getElementById("elementColor").value=$(currElementId).css('color');
 }
 
 function clearMonitorState(){
@@ -383,6 +383,7 @@ function changeState(){
 	$(currElementId).height(document.getElementById("elementHeight").value);
 	$(currElementId).offset({top:document.getElementById("elementY").value, left:document.getElementById("elementX").value});
 	$(currElementId+' span').css('font-size',document.getElementById("elementTextSize").value);
+    $(currElementId).css('color',document.getElementById("elementColor").value);
 	preview();
 }
 
@@ -409,6 +410,7 @@ function copyElement(){
 	$(tmpid).height(document.getElementById("elementHeight").value);
 	$(tmpid).offset({top:document.getElementById("elementY").value, left:document.getElementById("elementX").value});
 	$(tmpid+' span').css('font-size',document.getElementById("elementTextSize").value);
+    $(tmpid+' span').css('color',document.getElementById("elementColor").value);
     $(tmpid).trigger("click");
 	currElementId=tmpid;
 }
