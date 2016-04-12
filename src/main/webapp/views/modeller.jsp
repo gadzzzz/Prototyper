@@ -27,9 +27,20 @@
                 resizable: false
             });
 
+            $("#generatedialog").dialog({
+                autoOpen: false,
+                height: 350,
+                width: 400,
+                resizable: false
+            });
+
             $("#openload").click(function() {
                 loadAll();
                 $("#loaddialog").dialog("open");
+            });
+
+            $("#opengenerate").click(function() {
+                $("#generatedialog").dialog("open");
             });
         });
         $(function(){
@@ -55,6 +66,80 @@
 <div id="loaddialog" style="background-color: #e9eae4" title="Прототипы">
     <div id="prototypelist"></div>
 </div>
+<div id="generatedialog" style="background-color: #e9eae4" title="Генерация элементов">
+    <table>
+        <tr>
+            <td>
+                Значение:
+            </td>
+            <td>
+                <input type="text" id="genval" size="15">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Элемент:
+            </td>
+            <td>
+                <select id="gentype">
+                    <option selected value="label">Текст</option>
+                    <option value="button">Кнопка</option>
+                    <option value="field">Поле</option>
+                    <option value="image">Картинка</option>
+                    <option value="link">Ссылка</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Ширина:
+            </td>
+            <td>
+                <input type="number" id="genwidth" min="1" max="1000" value="1">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Высота:
+            </td>
+            <td>
+                <input type="number" id="genheight" min="1" max="1000" value="1">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Количество:
+            </td>
+            <td>
+                <input type="number" id="gencount" min="1" max="100" value="1">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Отступ слева:
+            </td>
+            <td>
+                <input type="number" id="genleft" min="0" max="100" value="0">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Отступ сверху:
+            </td>
+            <td>
+                <input type="number" id="gentop" min="0" max="100" value="0">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="button" value="Генерировать" onclick="generateTag()">
+            </td>
+            <td>
+                <input type="button" value="Очистить" onclick="cleareContent()">
+            </td>
+        </tr>
+    </table>
+</div>
 <div id="parent">
     <div id="toolbar">
         <div id="logo">
@@ -70,6 +155,7 @@
         <span title="Выбрать шаблон" id="openload" style='cursor: pointer;'><img class="quickbutton" src='/resources/images/icons/choose.png'></span>
         <span title="Экспорт в файл" id="export" onclick="toFile()" style='cursor: pointer;'><img class="quickbutton" src='/resources/images/icons/load.png'></span>
         <div id="userinfo">
+            <span title="Генерировать элементы" id="opengenerate" style='cursor: pointer;text-decoration: underline'>Генерация</span>
             <a href="/cabinet">Кабинет</a>
             <c:if test="${provider eq 'FACEBOOK'}"><i class="fa fa-facebook"></i></c:if>
             <c:if test="${provider eq 'GOOGLE'}"><i class="fa fa-google"></i></c:if>
@@ -203,7 +289,7 @@
             <table style="border-spacing: 5px;margin: 10px">
                 <tr>
                     <td onclick="createComplicatedTag('loginForm')">
-                        <div class="elementStyle" >Форма логина</div>
+                        <div class="elementStyle">Форма логина</div>
                     </td>
                     <td onclick="createComplicatedTag('registerForm')">
                         <div class="elementStyle" >Форма регистрации</div>

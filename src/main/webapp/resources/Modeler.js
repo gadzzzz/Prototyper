@@ -208,6 +208,44 @@ function createComplicatedTag(tag){
     });
 }
 
+function generateTag(){
+    var value = $("#genval").val();
+    var type = $("#gentype").val();
+    var width = $("#genwidth").val();
+    var height = $("#genheight").val();
+    var count = $("#gencount").val();
+    var left = parseInt($("#genleft").val());
+    var top = parseInt($("#gentop").val());
+    var offsettop =50+ top;
+    var offsetleft =250+ left;
+    for(var i=0;i<count;i++){
+        createTag(type);
+        $("#id"+elementIndex).offset({top:offsettop,left:offsetleft});
+        offsettop = offsettop + top;
+        offsetleft = offsetleft + left;
+        $("#id"+elementIndex+' span').text(value);
+        $("#id"+elementIndex).width(width);
+        $("#id"+elementIndex).height(height);
+        $("#id"+elementIndex).addClass('activeElement');
+        $("#id"+elementIndex).addClass('multipleSelect');
+    }
+}
+
+function cleareContent(){
+    $('#content').empty();
+    $("#pages").contents().filter(function(){
+        return !$(this).is('#pagebtns');
+    }).remove();
+    clearMonitorState();
+    map = new Map;
+    previewPageIndex = 0;
+    previewPageCount = 0;
+    currElementId = '';
+    currPreviewId = '';
+    prevPreviewId = '';
+    elementIndex = 0;
+}
+
 function save(){
     var title = $('#savename').val();
     if(title.trim()!='') {
