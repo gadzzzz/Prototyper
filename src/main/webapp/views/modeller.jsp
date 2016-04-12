@@ -206,15 +206,31 @@
                         <div class="elementStyle" >Форма логина</div>
                     </td>
                     <td onclick="createComplicatedTag('registerForm')">
-                        <div class="elementLabel elementStyle" >Форма регистрации</div>
+                        <div class="elementStyle" >Форма регистрации</div>
                     </td>
                 </tr>
                 <tr>
-                    <td onclick="createComplicatedTag('loginForm')">
-                        <div class="elementStyle" >Форма коментария</div>
+                    <td onclick="createComplicatedTag('commentForm')">
+                        <div class="elementStyle" >Форма добавления коментария</div>
                     </td>
                     <td onclick="createComplicatedTag('newsForm')">
-                        <div class="elementLabel elementStyle" >Форма добавления новости</div>
+                        <div class="elementStyle" >Форма добавления новости</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td onclick="createComplicatedTag('oneColumnPrototype')">
+                        <div class="elementStyle" >Одноколоночный прототип</div>
+                    </td>
+                    <td onclick="createComplicatedTag('twoColumnPrototype')">
+                        <div class="elementStyle" >Двухколоночный прототип</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td onclick="createComplicatedTag('threeColumnPrototype')">
+                        <div class="elementStyle" >Трехколоночный прототип</div>
+                    </td>
+                    <td onclick="createComplicatedTag('menuElement')">
+                        <div class="elementStyle" >Меню</div>
                     </td>
                 </tr>
             </table>

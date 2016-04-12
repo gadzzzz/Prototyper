@@ -187,10 +187,22 @@ function createComplicatedTag(tag){
         dataarr = registerForm;
     if(tag=='newsForm')
         dataarr = newsForm;
+    if(tag=='commentForm')
+        dataarr = commentForm;
+    if(tag=='oneColumnPrototype')
+        dataarr = oneColumnPrototype;
+    if(tag=='twoColumnPrototype')
+        dataarr = twoColumnPrototype;
+    if(tag=='threeColumnPrototype')
+        dataarr = threeColumnPrototype;
+    if(tag=='menuElement')
+        dataarr = menuElement;
     jQuery.each(dataarr,function(i, val){
         createTag(val.name);
         $("#id"+elementIndex).offset({top:val.top,left:val.left});
-        $("#id"+elementIndex).text(val.val);
+        $("#id"+elementIndex+' span').text(val.val);
+        $("#id"+elementIndex).width(val.width);
+        $("#id"+elementIndex).height(val.height);
         $("#id"+elementIndex).addClass('activeElement');
         $("#id"+elementIndex).addClass('multipleSelect');
     });
