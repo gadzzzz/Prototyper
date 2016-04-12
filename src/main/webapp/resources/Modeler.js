@@ -10,7 +10,7 @@ var dragList = [];
 
 function addElement(content,taghtml) {
 	$(content).append(taghtml);
-    $('.clickElement').click(
+    $('#id'+elementIndex).click(
         function(e){
             if (e.ctrlKey) {
                 currElementId = '#' + this.id;
@@ -19,7 +19,7 @@ function addElement(content,taghtml) {
             }else {
                 if(currElementId!='#'+this.id) {
                     currElementId = '#' + this.id;
-                    $('.activeElement').removeClass('multipleSelect');//need fix
+                    $('.activeElement').removeClass('multipleSelect');
                     $(currElementId).addClass('activeElement').siblings().removeClass('activeElement');
                     monitorState();
                 }
@@ -46,7 +46,6 @@ function addElement(content,taghtml) {
             currElementId = '#' + this.id;
             var classList = $('.multipleSelect');
             dragList = [];
-            console.log('start');
             $.each(classList, function(index) {
                 dragList.push(new elementConstrucrot( ui.offset.left-$(this).offset().left,ui.offset.top-$(this).offset().top));
             });
